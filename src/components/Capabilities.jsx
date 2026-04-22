@@ -13,7 +13,7 @@ export default function Capabilities() {
   return (
     <Section id="services" alt>
       <SectionHeader badge="Core Capabilities" title="What I Build" sub="Premium AI-powered systems engineered for real-world business impact" />
-      <motion.div ref={ref} variants={stagger} initial="hidden" animate={inView ? 'show' : 'hidden'}
+      <motion.div className="capabilities-grid" ref={ref} variants={stagger} initial="hidden" animate={inView ? 'show' : 'hidden'}
         style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 30 }}>
         {CAPABILITIES.map((cap, i) => (
           <motion.div key={i} variants={fadeUp}

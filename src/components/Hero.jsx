@@ -9,13 +9,14 @@ export default function Hero() {
   const opacity = useTransform(scrollY, [0, 400], [1, 0])
 
   return (
-    <section id="home" style={{ position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10rem 3.5rem 7rem', gap: '2rem' }}>
+    <section id="home" className="hero-section" style={{ position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10rem 3.5rem 7rem', gap: '2rem' }}>
       {/* Left */}
-      <motion.div style={{ maxWidth: '54%', y, opacity }} >
+      <motion.div className="hero-content" style={{ maxWidth: '54%', y, opacity }} >
         <motion.p variants={fadeUp} initial="hidden" animate="show" style={{ fontSize: 27, color: S.muted, marginBottom: 10, letterSpacing: '0.5px' }}>
           Hi, I'm
         </motion.p>
         <motion.h1
+          className="hero-title"
           variants={fadeUp} initial="hidden" animate="show"
           transition={{ delay: 0.1 }}
           style={{ fontFamily: 'Syne, sans-serif', fontWeight: 600, fontSize: 'clamp(3rem, 5.5vw, 4.5rem)', lineHeight: 1.05, marginBottom: 18 }}
@@ -34,7 +35,7 @@ export default function Hero() {
           <span style={{ color: S.accent, fontWeight: 600 }}>user interfaces</span>
         </motion.p>
 
-        <motion.div variants={stagger} initial="hidden" animate="show" transition={{ delayChildren: 0.4 }}
+        <motion.div className="hero-buttons" variants={stagger} initial="hidden" animate="show" transition={{ delayChildren: 0.4 }}
           style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           <motion.a href="#projects" variants={fadeUp}
             whileHover={{ scale: 1.05, boxShadow: '0 0 36px rgba(0,229,160,0.45)' }}
@@ -66,6 +67,7 @@ export default function Hero() {
 
       {/* Right — Photo Ring */}
       <motion.div
+        className="hero-image-container"
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -82,7 +84,7 @@ export default function Hero() {
           }}
         />
         {/* Inner circle */}
-        <div style={{
+        <div className="hero-ring" style={{
           position: 'relative', zIndex: 1,
           width: 360, height: 360, borderRadius: '50%',
           background: 'linear-gradient(135deg, #0c1220, #101828)',

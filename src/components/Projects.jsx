@@ -6,19 +6,12 @@ import { PROJECTS } from '../constants'
 import { S } from '../constants/styles'
 import { Section, SectionHeader } from './Section'
 
-// ─── tunables ────────────────────────────────────────────────────────────────
-const CARD_W   = 320
-const CARD_H   = 480
-const RADIUS_X = 520   // horizontal spread
-const RADIUS_Z = 260   // depth
-// ─────────────────────────────────────────────────────────────────────────────
-
-function getCardTransform(index, total, activeIndex) {
+function getCardTransform(index, total, activeIndex, radiusX, radiusZ) {
   const angleStep = (2 * Math.PI) / total
   const angle     = (index - activeIndex) * angleStep
 
-  const x         = Math.sin(angle) * RADIUS_X
-  const z         = Math.cos(angle) * RADIUS_Z - RADIUS_Z
+  const x         = Math.sin(angle) * radiusX
+  const z         = Math.cos(angle) * radiusZ - radiusZ
   const rotateY   = -angle * (180 / Math.PI)
   const proximity = Math.cos(angle)   // 1 = directly in front, -1 = behind
 
@@ -32,7 +25,7 @@ function getCardTransform(index, total, activeIndex) {
   return { x, z, rotateY, scale, brightness, blur, isVisible, proximity }
 }
 
-function ProjectCard({ proj, transform, isActive, onClick }) {
+function ProjectCard({ proj, transform, isActive, onClick, cardW, cardH }) {
   const { x, z, rotateY, scale, brightness, blur, isVisible } = transform
   const glow = proj.color ?? '#00e5a0'
 
@@ -50,7 +43,7 @@ function ProjectCard({ proj, transform, isActive, onClick }) {
       transition={{ type: 'spring', stiffness: 220, damping: 30 }}
       style={{
         position: 'absolute',
-        width: CARD_W,
+        width: cardW,
         cursor: isActive ? 'default' : 'pointer',
         transformStyle: 'preserve-3d',
         zIndex: isActive ? 10 : Math.round(transform.proximity * 5 + 5),
@@ -81,7 +74,7 @@ function ProjectCard({ proj, transform, isActive, onClick }) {
             : '0 16px 40px rgba(0,0,0,0.5)',
           padding: '1.8rem',
           display: 'flex', flexDirection: 'column', gap: '0.9rem',
-          minHeight: CARD_H,
+          minHeight: cardH,
           position: 'relative',
         }}
       >
@@ -174,6 +167,23 @@ function ProjectCard({ proj, transform, isActive, onClick }) {
 export default function Projects() {
   const total = PROJECTS.length
   const [active, setActive] = useState(0)
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200)
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  function getCardDimensions() {
+    if (windowWidth <= 768) {
+      return { cardW: windowWidth * 0.85, cardH: 480, radiusX: windowWidth * 0.45, radiusZ: 180 }
+    }
+    return { cardW: 320, cardH: 480, radiusX: 520, radiusZ: 260 }
+  }
+
+  const { cardW, cardH, radiusX, radiusZ } = getCardDimensions()
+
   const isDragging  = useRef(false)
   const dragStartX  = useRef(0)
   const dragDelta   = useRef(0)
@@ -217,13 +227,14 @@ export default function Projects() {
 
       {/* ── 3-D Stage ── */}
       <div
+        className="projects-section-wrapper"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
         style={{
           position: 'relative',
-          height: CARD_H + 100,
+          height: cardH + 100,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -236,7 +247,7 @@ export default function Projects() {
         }}
       >
         {PROJECTS.map((proj, i) => {
-          const transform = getCardTransform(i, total, active)
+          const transform = getCardTransform(i, total, active, radiusX, radiusZ)
           return (
             <ProjectCard
               key={proj.name}
@@ -244,6 +255,8 @@ export default function Projects() {
               transform={transform}
               isActive={i === active}
               onClick={() => setActive(i)}
+              cardW={cardW}
+              cardH={cardH}
             />
           )
         })}

@@ -1,0 +1,76 @@
+/* Mobile Responsive Overrides */
+@media screen and (max-width: 768px) {
+  /* Common Adjustments */
+  .section-container,
+  .hero-section,
+  .contact-section {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    flex-direction: column !important;
+    padding-top: 8rem !important;
+    padding-bottom: 4rem !important;
+    text-align: center;
+    justify-content: center !important;
+  }
+
+  .hero-content {
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+  }
+
+  .hero-content p {
+    text-align: center !important;
+  }
+
+  .hero-buttons {
+    justify-content: center !important;
+  }
+
+  .hero-ring {
+    width: 280px !important;
+    height: 280px !important;
+    margin-top: 3rem !important;
+  }
+
+  /* Navbar */
+  .main-nav {
+    padding: 0 1.5rem !important;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-hamburger {
+    display: flex !important;
+  }
+
+  /* Section Titles */
+  .section-title, .contact-title {
+    font-size: 2.3rem !important;
+  }
+
+  .capabilities-grid, .tech-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .contact-section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .projects-section-wrapper {
+    margin-top: 1rem !important;
+  }
+}

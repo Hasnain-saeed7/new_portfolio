@@ -66,7 +66,7 @@ export default function TechExpertise() {
   return (
     <Section id="about" alt>
       <SectionHeader badge="Technical Expertise" title="Skills & Technologies" sub="A full-stack toolkit built for modern AI-powered products" />
-      <motion.div ref={ref} variants={stagger} initial="hidden" animate={inView ? 'show' : 'hidden'}
+      <motion.div className="tech-grid" ref={ref} variants={stagger} initial="hidden" animate={inView ? 'show' : 'hidden'}
         style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '2rem 3rem' }}>
         {SKILLS.map((group, i) => (
           <motion.div key={i} variants={fadeUp}>

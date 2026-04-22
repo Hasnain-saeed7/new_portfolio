@@ -5,7 +5,7 @@ import { useReveal } from '../hooks/useReveal'
 /* ─── SECTION WRAPPER ─── */
 export function Section({ id, alt, children, style = {} }) {
   return (
-    <section id={id} style={{ position: 'relative', zIndex: 1, padding: '6rem 3.5rem', background: alt ? S.bg2 : 'transparent', ...style }}>
+    <section className="section-container" id={id} style={{ position: 'relative', zIndex: 1, padding: '6rem 3.5rem', background: alt ? S.bg2 : 'transparent', ...style }}>
       {children}
     </section>
   )
@@ -23,8 +23,8 @@ export function SectionHeader({ badge, title, sub }) {
         padding: '5px 18px', fontSize: 13, fontWeight: 800,
         letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '1.2rem',
       }}>{badge}</motion.span>
-      <motion.h2 variants={fadeUp} style={{ fontFamily: 'Times New Roman', fontSize: 50, fontWeight: 900, marginBottom: 18 }}>{title}</motion.h2>
-      <motion.p variants={fadeUp} style={{ fontSize: 17, color: S.muted, maxWidth: 540, margin: '0 auto', lineHeight: 1.7 }}>{sub}</motion.p>
+      <motion.h2 className="section-title" variants={fadeUp} style={{ fontFamily: 'Times New Roman', fontSize: 50, fontWeight: 900, marginBottom: 18 }}>{title}</motion.h2>
+      <motion.p className="section-subtitle" variants={fadeUp} style={{ fontSize: 17, color: S.muted, maxWidth: 540, margin: '0 auto', lineHeight: 1.7 }}>{sub}</motion.p>
     </motion.div>
   )
 } 

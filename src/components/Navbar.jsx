@@ -235,6 +235,7 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
+        className="main-nav"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -321,7 +322,7 @@ export default function Navbar() {
         </motion.a>
 
         {/* ── Desktop Links ── */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+        <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
           {NAV_LINKS.map((link, i) => (
             <NavLink key={link} link={link} active={active} onClick={setActive} index={i} />
           ))}
@@ -329,6 +330,7 @@ export default function Navbar() {
 
         {/* ── Mobile hamburger ── */}
         <motion.button
+          className="mobile-hamburger"
           onClick={() => setMobileOpen(o => !o)}
           style={{
             display: 'none', // show via CSS media query if needed

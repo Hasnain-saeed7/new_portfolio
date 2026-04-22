@@ -15,7 +15,7 @@ export default function Contact() {
     { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/hasnainsykh' },
   ]
   return (
-    <section id="contact" style={{ position: 'relative', zIndex: 1, padding: '6rem 3.5rem', background: `linear-gradient(180deg, ${S.bg2}, ${S.bg})`, textAlign: 'center' }}>
+    <section id="contact" className="contact-section" style={{ position: 'relative', zIndex: 1, padding: '6rem 3.5rem', background: `linear-gradient(180deg, ${S.bg2}, ${S.bg})`, textAlign: 'center' }}>
       <motion.div ref={ref} variants={stagger} initial="hidden" animate={inView ? 'show' : 'hidden'}>
         <motion.span variants={fadeUp} style={{
           display: 'inline-block', background: S.accentDim, color: S.accent,
@@ -23,7 +23,7 @@ export default function Contact() {
           padding: '5px 18px', fontSize: 11, fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '1.2rem',
         }}>Contact</motion.span>
 
-        <motion.h2 variants={fadeUp} style={{ fontFamily: 'seraphine', fontSize:  60 ,  fontWeight: 800, margin: '1rem 0 14px' }}>
+        <motion.h2 className="contact-title" variants={fadeUp} style={{ fontFamily: 'seraphine', fontSize:  60 ,  fontWeight: 800, margin: '1rem 0 14px' }}>
           Let's Build Something
         </motion.h2>
 
